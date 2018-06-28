@@ -5,6 +5,7 @@ var guessHolder = document.getElementById("gH");
 var lettersGuessed = document.getElementById("lG");
 var audio = document.getElementById("audio");
 //remaining Guesses
+var gamesPlayed=0;
 var wins = 0;
 var remainingGuesses = 10;
 guessHolder.innerHTML = remainingGuesses;
@@ -81,12 +82,16 @@ function won()
     wordHolder.style.color = "blue";
     audio.src=successNoises[currentAnswer];
     audio.play();
-    wins++
+    wins++;
+    gamesPlayed++;
+    winNumber.innerHTML=wins + " out of " +gamesPlayed;
 }
 
 function failure(){
     wordHolder.style.color ="red";
     var word = "";
+    gamesPlayed++;
+    winNumber.innerHTML=wins + " out of " +gamesPlayed;
     
     for(var i =0;i<currentAnswer.length;i++)
     {
