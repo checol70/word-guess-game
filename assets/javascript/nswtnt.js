@@ -34,7 +34,7 @@ var failNoises = {
     "sonic":"assets/sounds/SonicFail.mp3",
     "donkey kong":"assets/sounds/DKFailure.mp3"
 }
-//current Answer
+//current Answer  commenting out for debugging porpoises
 var currentAnswer = allAnswers[Math.floor(Math.random() * allAnswers.length)];
 revealLetters();
 
@@ -68,13 +68,11 @@ document.onkeyup = function (e)
             {
                 remainingGuesses--;
                 revealGuesses()
+                if(remainingGuesses=== 0){
+                    failure();
+                }
             }
         }
-    }
-    else
-    {
-        failure();
-
     }
 }
 function won()
@@ -92,7 +90,7 @@ function failure(){
     
     for(var i =0;i<currentAnswer.length;i++)
     {
-        if(currentAnswer.charAt(i)!==" ")
+        if(currentAnswer.charAt(i)!=" ")
         {
             word += currentAnswer.charAt(i).toUpperCase();
         } 
@@ -162,9 +160,13 @@ function checkAllLetters(n)
 {
     for(var i = 0; i<currentAnswer.length;i++)
     {
-        if(!currentGuess.includes(currentAnswer.charAt(i)))
+        if(currentAnswer.charAt(i) !=" ")
         {
-            return false;
+            
+            if(!currentGuess.includes(currentAnswer.charAt(i)))
+            {
+                return false;
+            }
         }
     }
     return true;
